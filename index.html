@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Take the Findom-themed interactive quiz to discover what kind of sub you are! Fun, flirty, and insightful. Find your true sub personality now." />
+  <meta name="author" content="@paypiggy2474188" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="What Kind of Sub Are You? – Findom Personality Quiz" />
+  <meta name="twitter:description" content="Take the Findom-themed interactive quiz to discover what kind of sub you are! Fun, flirty, and insightful. Find your true sub personality now." />
+  <meta name="twitter:image" content="preview.png" />
+  <meta name="twitter:creator" content="@paypiggy2474188" />
+  <title>What Kind of Sub Are You? | Findom Quiz</title>
+  <link rel="icon" href="favicon.png" type="image/png" />
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+  <!-- End Google Analytics -->
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 100%;
+    }
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: #fff0f6;
+      color: #4a2c35;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      text-align: center;
+      padding: 1rem 2rem;
+    }
+    .logo {
+      max-width: 100px;
+      margin: 0 auto 1rem;
+    }
+    h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .subtitle {
+      font-size: 1.1rem;
+      color: #a64a7b;
+      max-width: 700px;
+      margin: 0 auto;
+      margin-top: 0.5rem;
+      line-height: 1.6;
+    }
+    .subtitle::after {
+      content: " This playful personality test is crafted to dive deep into your submissive traits in the world of financial domination. Whether you're a loyal puppy, a romantic softie, or a full-on paypig — your result awaits. Answer honestly and enjoy the journey...";
+      display: block;
+      margin-top: 0.5rem;
+    }
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 2rem 1rem;
+    }
+    #quiz-container {
+      background: #ffeaf1;
+      padding: 3rem;
+      border-radius: 24px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      max-width: 700px;
+      width: 100%;
+      text-align: center;
+      transition: opacity 0.6s ease-in-out;
+      opacity: 1;
+    }
+    #question {
+      font-size: 1.7rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      transition: all 0.4s ease-in-out;
+      min-height: 72px; /* to reduce layout shift */
+    }
+    .btn {
+      background: #a64a7b;
+      color: white;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 24px;
+      margin: 0.75rem auto;
+      cursor: pointer;
+      font-size: 1.3rem;
+      font-weight: 700;
+      transition: background 0.3s ease-in-out;
+      display: block;
+      max-width: 400px;
+    }
+    .btn:hover {
+      background: #b76e8b;
+    }
+    #answer-buttons button {
+      display: block;
+      margin: 0.5rem auto;
+      width: 100%;
+      max-width: 400px;
+    }
+    .hide {
+      display: none;
+    }
+    #result-container {
+      margin-top: 3rem;
+      padding-bottom: 2rem;
+    }
+    #result-title {
+      font-size: 2.2rem;
+      margin-top: 1rem;
+      font-weight: 700;
+      color: #a64a7b;
+    }
+    #result-description {
+      margin-top: 1rem;
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.5;
+    }
+    #result-quote {
+      font-style: italic;
+      margin-top: 0.75rem;
+      color: #805d6b;
+    }
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #b76e8b;
+      padding: 1rem;
+      background-color: #fff0f6;
+      border-top: 1px solid #f0cfdc;
+      margin-top: auto;
+    }
+    footer a {
+      color: #a64a7b;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="Logo" class="logo" />
+    <h1>What Kind of Sub Are You?</h1>
+    <p class="subtitle">Find out your true sub personality with this fun, flirty Findom-themed quiz!</p>
+  </header>
+  <main>
+    <section id="quiz-container">
+      <div id="question-container" class="hide">
+        <div id="question">Question text</div>
+        <div id="answer-buttons"></div>
+      </div>
+      <div id="start-container">
+        <button id="start-btn" class="btn">Start Quiz</button>
+      </div>
+      <div id="result-container" class="hide">
+        <h2>Your Result:</h2>
+        <div id="result-title"></div>
+        <div id="result-description"></div>
+        <div id="result-quote"></div>
+        <div class="result-buttons">
+          <button id="restart-btn" class="btn">Retake Quiz</button>
+          <button id="tweet-btn" class="btn">Tweet Your Result</button>
+          <a id="tribute-btn" href="https://paypal.me/paypiggy2474188" target="_blank" class="btn">Donate</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <p>Copyright © 2025 created by <a href="https://x.com/paypiggy2474188" target="_blank">@paypiggy2474188</a><br />
+    Email: <a href="mailto:help@domain.com">help@domain.com</a></p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const startButton = document.getElementById('start-btn');
+      const restartButton = document.getElementById('restart-btn');
+      const tweetButton = document.getElementById('tweet-btn');
+      const questionContainer = document.getElementById('question-container');
+      const startContainer = document.getElementById('start-container');
+      const resultContainer = document.getElementById('result-container');
+      const questionElement = document.getElementById('question');
+      const answerButtonsElement = document.getElementById('answer-buttons');
+      const resultTitle = document.getElementById('result-title');
+      const resultDescription = document.getElementById('result-description');
+      const resultQuote = document.getElementById('result-quote');
+
+      let currentQuestionIndex = 0;
+      let shuffledQuestions = [];
+      let scores = {};
+      let firstQuestionShown = false;
+
+      const questions = [
+        {
+          question: "How do you feel about sending tributes to your Domme?",
+          answers: [
+            { text: "I love to spoil her anytime she asks.", type: "wallet" },
+            { text: "I’m hesitant but try my best.", type: "tryhard" },
+            { text: "I prefer small gifts and attention.", type: "puppy" },
+            { text: "I overthink and worry if it’s enough.", type: "clown" }
+          ]
+        },
+        {
+          question: "What’s your favorite way to please your Domme?",
+          answers: [
+            { text: "Financial obedience – money is power.", type: "wallet" },
+            { text: "Listening carefully and obeying rules.", type: "puppy" },
+            { text: "Trying hard to impress her.", type: "tryhard" },
+            { text: "Just being there and hoping she notices.", type: "clown" }
+          ]
+        },
+        {
+          question: "How often do you check your phone waiting for her message?",
+          answers: [
+            { text: "Constantly, I can’t get enough.", type: "repeater" },
+            { text: "Sometimes, but I try to stay busy.", type: "lostboy" },
+            { text: "Rarely, I trust her timing.", type: "romantic" },
+            { text: "I panic and overthink.", type: "clown" }
+          ]
+        },
+        {
+          question: "When you think about your Domme, you feel:",
+          answers: [
+            { text: "Excited and eager to give.", type: "wallet" },
+            { text: "Comforted and safe.", type: "puppy" },
+            { text: "Nervous but hopeful.", type: "lostboy" },
+            { text: "Romantic and devoted.", type: "romantic" }
+          ]
+        },
+        {
+          question: "How do you react to her teasing and control?",
+          answers: [
+            { text: "I enjoy the power dynamic intensely.", type: "wallet" },
+            { text: "I wag my tail and follow happily.", type: "puppy" },
+            { text: "I try hard to win her approval.", type: "tryhard" },
+            { text: "I sometimes feel lost and unsure.", type: "lostboy" }
+          ]
+        },
+        {
+          question: "What best describes your financial submission style?",
+          answers: [
+            { text: "Generous and willing to spend freely.", type: "wallet" },
+            { text: "Careful and obedient with money.", type: "puppy" },
+            { text: "Trying to prove my worth financially.", type: "tryhard" },
+            { text: "Unsure, often anxious about spending.", type: "clown" }
+          ]
+        },
+        {
+          question: "Do you enjoy cute nicknames from your Domme?",
+          answers: [
+            { text: "Yes! It makes me feel special.", type: "puppy" },
+            { text: "Sometimes, but I’m shy about it.", type: "romantic" },
+            { text: "I don’t care much for nicknames.", type: "wallet" },
+            { text: "I wish she’d notice me more.", type: "clown" }
+          ]
+        },
+        {
+          question: "How do you handle rejection or ignoring?",
+          answers: [
+            { text: "I take it in stride and keep giving.", type: "wallet" },
+            { text: "I feel sad but stay loyal.", type: "lostboy" },
+            { text: "I overthink and replay interactions.", type: "repeater" },
+            { text: "I try harder to get attention.", type: "tryhard" }
+          ]
+        },
+        {
+          question: "Are you more emotional or logical in your submission?",
+          answers: [
+            { text: "Emotional, I crave closeness.", type: "romantic" },
+            { text: "Logical, I follow rules strictly.", type: "puppy" },
+            { text: "A mix, depending on the moment.", type: "lostboy" },
+            { text: "I’m all over the place.", type: "clown" }
+          ]
+        },
+        {
+          question: "What do you hope to gain from your Domme?",
+          answers: [
+            { text: "Her attention and control.", type: "wallet" },
+            { text: "A safe space to be myself.", type: "puppy" },
+            { text: "Recognition and love.", type: "romantic" },
+            { text: "To be seen and understood.", type: "lostboy" }
+          ]
+        },
+        {
+          question: "How do you feel when your Domme praises you?",
+          answers: [
+            { text: "Proud and motivated to give more.", type: "wallet" },
+            { text: "Happy and comforted.", type: "puppy" },
+            { text: "Nervous but hopeful.", type: "tryhard" },
+            { text: "Unsure and self-critical.", type: "clown" }
+          ]
+        },
+        {
+          question: "What kind of boundaries do you have in your submission?",
+          answers: [
+            { text: "I trust her to guide me.", type: "wallet" },
+            { text: "I’m still figuring them out.", type: "lostboy" },
+            { text: "I set clear limits.", type: "puppy" },
+            { text: "I worry I don’t have enough.", type: "clown" }
+          ]
+        },
+        {
+          question: "Do you like to fantasize about your Domme?",
+          answers: [
+            { text: "All the time!", type: "romantic" },
+            { text: "Sometimes, especially when missing her.", type: "lostboy" },
+            { text: "Not really, I prefer real interactions.", type: "puppy" },
+            { text: "I get anxious about it.", type: "clown" }
+          ]
+        },
+        {
+          question: "How do you respond to commands?",
+          answers: [
+            { text: "Immediately and eagerly.", type: "puppy" },
+            { text: "After thinking carefully.", type: "tryhard" },
+            { text: "I get nervous but try.", type: "clown" },
+            { text: "I obey because I want to.", type: "wallet" }
+          ]
+        },
+        {
+          question: "If you had to describe yourself in one word, it would be:",
+          answers: [
+            { text: "Devoted", type: "puppy" },
+            { text: "Generous", type: "wallet" },
+            { text: "Nervous", type: "clown" },
+            { text: "Hopeful", type: "lostboy" }
+          ]
+        }
+      ];
+
+      const results = {
+        wallet: {
+          title: "The Wallet 💸",
+          description: "You crave financial destruction in the hands of someone who makes your world spin.",
+          quote: "Obedience is expensive."
+        },
+        puppy: {
+          title: "The Obedient Puppy 🐶",
+          description: "Loyal, devoted, and eager to please.",
+          quote: "Good boys wait."
+        },
+        clown: {
+          title: "The Clown 🤡",
+          description: "You panic and overthink, but you're sweet underneath it all.",
+          quote: "Please notice me."
+        },
+        tryhard: {
+          title: "The Try-Hard 🎭",
+          description: "You put in the effort to be noticed.",
+          quote: "Maybe this will impress her."
+        },
+        lostboy: {
+          title: "The Lost Boy 🧍",
+          description: "You feel unsure but desperately want to belong.",
+          quote: "Searching for my place."
+        },
+        romantic: {
+          title: "The Romantic Sub 💌",
+          description: "You crave emotional intimacy alongside your submission.",
+          quote: "Love and obedience aren't so different."
+        },
+        repeater: {
+          title: "The Repeater 🔄",
+          description: "You can’t stop thinking about her messages and moments.",
+          quote: "Replay, replay, replay."
+        }
+      };
+
+      function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+      }
+
+      function startQuiz() {
+        scores = {};
+        shuffledQuestions = [...questions];
+        shuffleArray(shuffledQuestions);
+        currentQuestionIndex = 0;
+        firstQuestionShown = false;
+
+        startContainer.classList.add('hide');
+        resultContainer.classList.add('hide');
+        questionContainer.classList.remove('hide');
+
+        // Show first question instantly, no fade
+        showQuestionInstant();
+      }
+
+      function showQuestionInstant() {
+        clearAnswers();
+        const currentQuestion = shuffledQuestions[currentQuestionIndex];
+        questionElement.textContent = currentQuestion.question;
+        currentQuestion.answers.forEach(answer => {
+          const button = document.createElement('button');
+          button.classList.add('btn');
+          button.textContent = answer.text;
+          button.addEventListener('click', () => selectAnswer(answer.type));
+          answerButtonsElement.appendChild(button);
+        });
+        firstQuestionShown = true;
+      }
+
+      function showQuestion() {
+        if (!firstQuestionShown) {
+          showQuestionInstant();
+          return;
+        }
+        fadeOutIn(() => {
+          clearAnswers();
+          const currentQuestion = shuffledQuestions[currentQuestionIndex];
+          questionElement.textContent = currentQuestion.question;
+          currentQuestion.answers.forEach(answer => {
+            const button = document.createElement('button');
+            button.classList.add('btn');
+            button.textContent = answer.text;
+            button.addEventListener('click', () => selectAnswer(answer.type));
+            answerButtonsElement.appendChild(button);
+          });
+        });
+      }
+
+      function clearAnswers() {
+        answerButtonsElement.innerHTML = '';
+      }
+
+      function selectAnswer(type) {
+        scores[type] = (scores[type] || 0) + 1;
+        currentQuestionIndex++;
+        if (currentQuestionIndex < shuffledQuestions.length) {
+          showQuestion();
+        } else {
+          showResult();
+        }
+      }
+
+      function showResult() {
+        questionContainer.classList.add('hide');
+        resultContainer.classList.remove('hide');
+
+        // Find highest scoring type; if tie, pick randomly among top scorers
+        let highestScore = 0;
+        let topTypes = [];
+        for (const [key, value] of Object.entries(scores)) {
+          if (value > highestScore) {
+            highestScore = value;
+            topTypes = [key];
+          } else if (value === highestScore) {
+            topTypes.push(key);
+          }
+        }
+        let resultType;
+        if (topTypes.length === 1) {
+          resultType = topTypes[0];
+        } else {
+          // Pick one randomly if tie
+          resultType = topTypes[Math.floor(Math.random() * topTypes.length)];
+        }
+
+        if (!resultType) {
+          resultType = 'wallet'; // fallback
+        }
+
+        const result = results[resultType];
+        resultTitle.textContent = result.title;
+        resultDescription.textContent = result.description;
+        resultQuote.textContent = result.quote;
+
+        setTimeout(() => {
+          if (window.innerWidth < 768) {
+            resultContainer.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 300);
+      }
+
+      function fadeOutIn(callback) {
+        questionContainer.style.opacity = 0;
+        setTimeout(() => {
+          callback();
+          questionContainer.style.opacity = 1;
+        }, 350);
+      }
+
+      function tweetResult() {
+        const text = encodeURIComponent(`I got: ${resultTitle.innerText}! What kind of sub are you? Take the quiz: https://subtypequiz.com`);
+        window.open(`https://twitter.com/intent/tweet?text=${text}`, '_blank');
+      }
+
+      startButton.addEventListener('click', startQuiz);
+      restartButton.addEventListener('click', () => {
+        resultContainer.classList.add('hide');
+        startContainer.classList.remove('hide');
+      });
+      tweetButton.addEventListener('click', tweetResult);
+    });
+  </script>
+</body>
+</html>
